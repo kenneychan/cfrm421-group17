@@ -29,11 +29,11 @@ all_models = [
 m0 = all_models[0]
 print(f"\nTicker: {TICKER}  |  {START_DATE} -> {END_DATE}  |  {len(m0.data)} total trading days")
 print(f"\n  Split summary (80 / 10 / 10  +  1-month purge gaps)")
-print(f"  train    {m0.train.index[0].date()} -> {m0.train.index[-1].date()}   ({len(m0.train)} days)")
+print(f"  train    {m0.train_set.index[0].date()} -> {m0.train_set.index[-1].date()}   ({len(m0.train_set)} days)")
 print(f"  [purge   1 month]")
-print(f"  refine   {m0.refine.index[0].date()} -> {m0.refine.index[-1].date()}   ({len(m0.refine)} days)")
+print(f"  refine   {m0.refine_set.index[0].date()} -> {m0.refine_set.index[-1].date()}   ({len(m0.refine_set)} days)")
 print(f"  [purge   1 month]")
-print(f"  evaluate {m0.evaluate.index[0].date()} -> {m0.evaluate.index[-1].date()}   ({len(m0.evaluate)} days)")
+print(f"  evaluate {m0.evaluate_set.index[0].date()} -> {m0.evaluate_set.index[-1].date()}   ({len(m0.evaluate_set)} days)")
 
 # -- 3. RUN ENSEMBLE ----------------------------------------------------------
 result = run_ensemble(all_models)

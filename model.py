@@ -2,9 +2,9 @@
 MODEL -- fetches Yahoo Finance data and defines the BaseModel interface.
 Each student subclasses BaseModel and implements three methods:
 
-    train()        -- fit your model on self.train (80%)
-    refine_model() -- tune hyperparameters on self.refine (10%)
-    predict()      -- return 1 or -1 using self.evaluate (10%)
+    train()        -- fit your model on self.train_set (80%)
+    refine_model() -- tune hyperparameters on self.refine_set (10%)
+    predict()      -- return 1 or -1 using self.evaluate_set (10%)
 
 Data split layout (1-month purge gaps between each set):
 
@@ -23,9 +23,9 @@ PURGE_MONTHS = 1   # calendar months to drop between splits
 class BaseModel:
     """
     Every student inherits from this and implements three methods:
-        train()        -- fit on self.train
-        refine_model() -- tune on self.refine
-        predict()      -- signal from self.evaluate -> 1 or -1
+        train()        -- fit on self.train_set
+        refine_model() -- tune on self.refine_set
+        predict()      -- signal from self.evaluate_set -> 1 or -1
 
     Constructor args:
         ticker     -- Yahoo Finance ticker symbol   (default: "DELL")
@@ -34,9 +34,9 @@ class BaseModel:
 
     Attributes set after __init__:
         self.data      -- full cleaned DataFrame
-        self.train     -- 80% training set
-        self.refine    -- 10% refinement / validation set
-        self.evaluate  -- 10% final holdout set
+        self.train_set     -- 80% training set
+        self.refine_set    -- 10% refinement / validation set
+        self.evaluate_set  -- 10% final holdout set
     """
 
     name: str = "Unnamed Model"
@@ -51,7 +51,7 @@ class BaseModel:
         self.start_date = start_date
         self.end_date   = end_date
         self.data       = self._fetch()
-        self.train, self.refine, self.evaluate = self._split()
+        self.train_set, self.refine_set, self.evaluate_set = self._split()
 
     def _fetch(self) -> pd.DataFrame:
         """Fetch daily OHLCV data from Yahoo Finance."""
@@ -99,7 +99,7 @@ class BaseModel:
 
     def train(self) -> None:
         """
-        Stage 1 -- Fit your model using self.train (80% of data).
+        Stage 1 -- Fit your model using self.train_set (80% of data).
         Store anything your model needs as instance attributes (e.g. self.weights).
         Called automatically by the controller before refine_model().
         """
@@ -107,15 +107,15 @@ class BaseModel:
 
     def refine_model(self) -> None:
         """
-        Stage 2 -- Tune hyperparameters using self.refine (10% of data).
-        self.train data must not be used here.
+        Stage 2 -- Tune hyperparameters using self.refine_set (10% of data).
+        self.train_set data must not be used here.
         Called automatically by the controller before predict().
         """
         raise NotImplementedError("Implement refine_model()")
 
     def predict(self) -> int:
         """
-        Stage 3 -- Predict next-day direction using self.evaluate (10% of data).
+        Stage 3 -- Predict next-day direction using self.evaluate_set (10% of data).
         Called automatically by the controller after train() and refine_model().
 
         Returns:

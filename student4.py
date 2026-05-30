@@ -12,7 +12,7 @@ class Student4Model(BaseModel):
 
     def train(self) -> None:
         """
-        Stage 1 -- Fit your model using self.train (80% of data).
+        Stage 1 -- Fit your model using self.train_set (80% of data).
         Store what you need as instance attributes, e.g.:
             self.weights = ...
             self.scaler  = ...
@@ -22,15 +22,15 @@ class Student4Model(BaseModel):
 
     def refine_model(self) -> None:
         """
-        Stage 2 -- Tune hyperparameters using self.refine (10% of data).
-        Do not use self.train data here.
+        Stage 2 -- Tune hyperparameters using self.refine_set (10% of data).
+        Do not use self.train_set data here.
         """
         # TODO: implement your refinement logic
         raise NotImplementedError("Student 4: implement refine_model()")
 
     def predict(self) -> int:
         """
-        Stage 3 -- Predict next-day direction using self.evaluate (10% of data).
+        Stage 3 -- Predict next-day direction using self.evaluate_set (10% of data).
         Return 1 (UP) or -1 (DOWN).
         """
         # TODO: implement your prediction logic

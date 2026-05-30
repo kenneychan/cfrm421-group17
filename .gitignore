@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 *.pyo
 .DS_Store
+.ipynb_checkpoints/
+student1_dev.ipynb
+student2_dev.ipynb
+student3_dev.ipynb
+student4_dev.ipynb
+student5_dev.ipynb
