@@ -6,9 +6,14 @@ This is your file. Do not edit any other student's file.
 import pandas as pd
 from model import BaseModel
 
+"""
+Dylan Domingo
+"""
+
 
 class Student3Model(BaseModel):
     name = "Student 3 Model"
+    
 
     def train(self) -> None:
         """
