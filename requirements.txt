@@ -1,5 +1,7 @@
 yfinance
 pandas
+numpy
+scikit-learn
 python-dateutil
 matplotlib
 jupyter
